@@ -159,7 +159,7 @@ class Edit extends MX_Controller
 			if($this->input->post("source"))
 			{
 				$file = fopen("application/modules/".$module."/config/".$name.".php", "w");
-				fwrite($file, $this->input->post("source"));
+				fwrite($file, $this->input->post("source", false));
 				fclose($file);
 
 				die("The settings have been saved!");

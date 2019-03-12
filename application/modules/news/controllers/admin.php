@@ -117,7 +117,7 @@ class Admin extends MX_Controller
 		$headline = $this->input->post('headline');
 		$avatar = $this->input->post('avatar');
 		$comments = $this->input->post('comments');
-		$content = $this->input->post('content');
+		$content = $this->input->post('content', false);
 
 		if(strlen($headline) > 70 || empty($headline))
 		{
