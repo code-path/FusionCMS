@@ -1,0 +1,1 @@
+<?php $config["owner"] = "adsf";
