@@ -3,9 +3,9 @@
 	{
 		function checkIfLoaded()
 		{
-			if(typeof Cache != "undefined")
+			if(typeof cache_mgr != "undefined")
 			{
-				Cache.load();
+				cache_mgr.load();
 			}
 			else
 			{
@@ -29,10 +29,10 @@
 
 	{if hasPermission("emptyCache")}
 		<span>
-			<a class="nice_button" href="javascript:void(0)" onClick="Cache.clear('all_but_item')"><b>Clear all but the item cache</b></a>&nbsp;
-			<a class="nice_button" href="javascript:void(0)" onClick="Cache.clear('website')">Clear all website cache</a>&nbsp;
-			<a class="nice_button" href="javascript:void(0)" onClick="Cache.clear('message')">Clear all message cache</a>&nbsp;
-			<a class="nice_button" href="javascript:void(0)" onClick="Cache.clear('all')">Clear all cache</a>
+			<a class="nice_button" href="javascript:void(0)" onClick="cache_mgr.clear('all_but_item')"><b>Clear all but the item cache</b></a>&nbsp;
+			<a class="nice_button" href="javascript:void(0)" onClick="cache_mgr.clear('website')">Clear all website cache</a>&nbsp;
+			<a class="nice_button" href="javascript:void(0)" onClick="cache_mgr.clear('message')">Clear all message cache</a>&nbsp;
+			<a class="nice_button" href="javascript:void(0)" onClick="cache_mgr.clear('all')">Clear all cache</a>
 		</span>
 	{/if}
 </section>
