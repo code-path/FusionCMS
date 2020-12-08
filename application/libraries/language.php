@@ -252,9 +252,9 @@ class Language
 		// Look in the module directory
 		elseif(is_dir("application/modules/".$this->CI->template->module_name."/language/")
 		&& is_dir("application/modules/".$this->CI->template->module_name."/language/".$language)
-		&& file_exists(is_dir("application/modules/".$this->CI->template->module_name."/language/".$file.".php")))
+		&& file_exists("application/modules/".$this->CI->template->module_name."/language/".$language."/".$file.".php"))
 		{
-			$path = "application/modules/".$this->CI->template->module_name."/language/".$file.".php";
+			$path = "application/modules/".$this->CI->template->module_name."/language/".$language."/".$file.".php";
 		}
 
 		// No language file was found, and this is the default language
