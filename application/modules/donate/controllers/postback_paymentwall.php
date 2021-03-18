@@ -133,4 +133,15 @@ class Postback_paymentwall extends MX_Controller
 
 		return false;
 	}
+	
+	public function isCidrMatched($ip, $range)
+	{
+	    list($subnet, $bits) = explode('/', $range);
+	    $ip = ip2long($ip);
+	    $subnet = ip2long($subnet);
+	    $mask = -1 << (32 - $bits);
+	    $subnet &= $mask;
+	    return ($ip & $mask) == $subnet;
+	}    
+	
 }
