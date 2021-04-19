@@ -2,14 +2,6 @@
 
 class Postback_paymentwall extends MX_Controller
 {
-	private $ipsWhitelist = array(
-		'174.36.92.186',
-		'174.36.96.66',
-		'174.36.92.187',
-		'174.36.92.192',
-		'174.37.14.28'
-	);
-
 	private $currency;
 	private $uid;
 
@@ -29,7 +21,7 @@ class Postback_paymentwall extends MX_Controller
 	 */
 	public function index()
 	{
-		if ( ! in_array($this->input->ip_address(), $this->ipsWhitelist))
+		if ( ! $this->isIpAddressValid($this->input->ip_address()) 
 		{
 			die("WRONG IP");
 		}
@@ -115,4 +107,41 @@ class Postback_paymentwall extends MX_Controller
 			$this->db->query("INSERT INTO monthly_income(month, amount) VALUES(?, ?)", array(date("Y-m"), floor($this->currency)));
 		}
 	} 
+	public function isIpAddressValid($ipAddress)
+	{
+		$ipsWhitelist = array(
+			'174.36.92.186',
+			'174.36.96.66',
+			'174.36.92.187',
+			'174.36.92.192',
+			'174.37.14.28'
+		);
+
+		$rangesWhitelist = array(
+			'216.127.71.0/24'
+		);
+
+		if (in_array($ipAddress, $ipsWhitelist)) {
+			return true;
+		}
+		
+		foreach ($rangesWhitelist as $range) {
+			if ($this->isCidrMatched($this->ipAddress, $range)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	public function isCidrMatched($ip, $range)
+	{
+	    list($subnet, $bits) = explode('/', $range);
+	    $ip = ip2long($ip);
+	    $subnet = ip2long($subnet);
+	    $mask = -1 << (32 - $bits);
+	    $subnet &= $mask;
+	    return ($ip & $mask) == $subnet;
+	}    
+	
 }
